@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/color.js"></script>
+    <script src="./js/anim.js"></script>
+    <script src="sw.js"></script>
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/-->
+
+    <link rel="stylesheet" href="css/animate.css"/>
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#FF00FF">
+
+      <!--IOS suppport-->
+      <link rel="apple-touch-icon" href="/img/tavern-sign.png">
+      <meta name="apple-mobile-web-app-status-bar" content="#AA00AA">
+      <title>LRR</title>
+  </head>
+
+  <body>
+
+    <nav>
+        <div class="nav-wrapper deep-purple darken-1">
+          <a href="#!" class="brand-logo left" style="margin-left:5px;">Long Road To Ruin</a>
+          <ul class="right">
+          
+          </ul>
+        </div>
+      </nav>
+
+
+      <div class="container valign-wrapper">
+
+        <div class="row" style="margin-top:10%;">
+            <div class="col s12 m12">
+
+              <div class="card" id="card">
+
+
+                <div class="card-header white-text" id="qq">
+                    <span >Quote</span>
+                  </div>
+          
+                
+                
+                <div class="card-content" >
+                  <p class="miotesto" id="quote" >I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                </div>
+                
+                <div class="card-action">
+                    <a href="#" id="author">- Author</a>
+                    <a href="#" id="source">Source</a>
+
+                  </div>
+                  <div class="card-action">
+                      <div class="centrati">
+                           
+
+                        <a class="btn-floating waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Save Quote"><i class="material-icons">add</i></a>          
+                    
+                        <a class="btn-floating waves-effect waves-light red tooltipped" data-position="bottom" data-tooltip="I love this quote"><i class="material-icons">favorite_border</i></a>          
+                        <a class="btn-floating waves-effect waves-light yellow tooltipped" data-position="bottom" data-tooltip="My favorite quote"><i class="material-icons">star</i></a>          
+
+                      </div>
+                    
+
+                  </div>
+
+
+              </div>
+            </div>
+          </div>
+        
+
+
+
+
+
+
+
+          <div class="my-fixed-action-btn">
+            <a class="btn-floating btn-large waves-effect waves-light purple" onclick="muoviti()">
+              <i class="large material-icons">message</i>
+            </a>
+           
+          </div>
+          
+      </div>
+    
+
+
+
+
+      <script src="./js/app.js"></script>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+    <script>
+            let ind=Math.floor(Math.random()*col.length);
+            document.getElementById('qq').style.backgroundColor=col[ind];
+            
+            let indAnim=Math.floor(Math.random()*enters.length);
+            document.getElementById('card').classList.add("animate__animated",enters[indAnim]);   
+
+
+            const quote=document.getElementById('quote');
+            const author=document.getElementById('author');
+            const source=document.getElementById('source');
+
+                
+            $(document).ready(function(){
+                    $('.tooltipped').tooltip();
+            });
+
+            const chiediDati=()=>{
+
+                fetch("./php/dammiquote.php")
+            .then(response => response.json())
+            .then(data => {
+                    
+                            console.log('Success:', data);
+
+                            quote.innerHTML=data.quote;
+                            author.innerHTML=data.autore;
+                            source.innerHTML=data.source;
+                            })
+                    .catch(err => console.log(err))
+
+            }
+
+
+            const muoviti=()=>{
+                chiediDati();
+
+                document.getElementById('card').classList.remove("animate__animated",enters[indAnim]);
+                document.getElementById('card').classList.add("animate__animated",out[indAnim]);   
+
+                setTimeout(()  =>{
+
+                    var ind=Math.floor(Math.random()*col.length);
+                    document.getElementById('qq').style.backgroundColor=col[ind];
+
+                    document.getElementById('card').classList.remove("animate__animated",out[indAnim]);
+
+                    indAnim=Math.floor(Math.random()*enters.length);
+                    document.getElementById('card').classList.add("animate__animated",enters[indAnim]); 
+
+                },1000);     
+            }
+                    
+    </script>
+</body>
+</html>

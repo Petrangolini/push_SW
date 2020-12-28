@@ -1,0 +1,16 @@
+{
+    "name":"LongRoadRiun",
+    "short_name":"LRR",
+    "start_url":"/index.html",
+    "display":"standalone",
+    "background_color":"#FF00FF",
+    "theme_color":"#AA00FF",
+    "orientation":"portrait-primary",
+    "icons":[
+        {
+            "src":"./img/quote.png",
+            "type":"image/png",
+            "sizes": "144x144"
+
+         }]
+}
